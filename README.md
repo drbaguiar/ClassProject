@@ -3,15 +3,21 @@ Course Project - Getting and Cleaning Data
 Steps to work on this course project
 ---------------------------
 
-Download the data source and put into a folder on your local drive. You'll have a UCI HAR Dataset folder.
+Run run_analysis.R 
 
-Put run_analysis.R in the parent folder of UCI HAR Dataset, then set it as your working directory using setwd() function in RStudio.
+First it will check for required packages and install them if needed.
 
-Run source("run_analysis.R"), then it will generate a new file tiny_data.txt in your working directory.
+Next, it will check for the UCI HAR Dataset directory.  If the directory does not exsist, it will download the zipfile and unzip it.
 
-After merging testing and training, labels are added and only columns that have to do with mean and standard deviation are kept.
+Next, it will load activity labels, data column names and will extract only the measurements on the mean and standard deviation for each measurement.
 
-Finally, the script will create a tidy data set containing the means of all the columns per test subject and per activity. This tidy dataset will be written to a tab-delimited file called tidy.txt, which can also be found in this repository.
+Next, it will load and process the testing data.
+
+Next, it will load and process the training data.
+
+Next it will merge testing and training data and add labels that have to do with mean and standard deviation.
+
+Finally, it will create a tidy data set containing the means of all the columns per test subject and per activity and will write the tidy dataset to a tab-delimited file called tidy.txt.
 
 About the Code Book
 --------------------
