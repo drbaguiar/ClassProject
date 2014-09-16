@@ -21,8 +21,10 @@ unzip(zip.file)
 activity_labels <- read.table("./UCI HAR Dataset/activity_labels.txt")[,2]
 features <- read.table("./UCI HAR Dataset/features.txt")[,2]
 
-# Extract only the measurements on the mean and standard deviation for each measurement.
+# Extract only the measurements on the mean and standard deviation for each measurement and clean headings
 extract_features <- grepl("mean|std", features)
+extract_features <- gsub("\\()","",extract_features)
+extract_features <- gsub("-","",extract_features)
 
 # Load and process X_test & y_test data.
 X_test <- read.table("./UCI HAR Dataset/test/X_test.txt")
@@ -62,11 +64,6 @@ train_data <- cbind(as.data.table(subject_train), y_train, X_train)
 data = rbind(test_data, train_data)
 id_labels   = c("subject", "Activity_ID", "Activity_Label")
 data_labels = setdiff(colnames(data), id_labels)
-for (i in 1:length(data_labels))
-{
-  data_labels[i] = gsub("\\()","",tolower(data_labels[i]))
-  data_labels[i] = gsub("-","",data_labels[i])
-}
 melt_data      = melt(data, id = id_labels, measure.vars = data_labels)
 
 # Apply mean function to dataset using dcast function
